@@ -1,0 +1,149 @@
+/* ----------------------------
+   General body and container
+---------------------------- */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #56ccf2, #2f80ed);
+    color: white;
+    text-align: center;
+    padding: 40px;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* ----------------------------
+   Buttons
+---------------------------- */
+.buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #27ae60;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: #219150;
+    transform: scale(1.05);
+}
+
+/* ----------------------------
+   Inputs
+---------------------------- */
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+}
+
+/* ----------------------------
+   Preview & results
+---------------------------- */
+#preview {
+    display: none;
+    margin-top: 20px;
+}
+
+#preview img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#results {
+    display: none;
+    margin-top: 20px;
+    text-align: left;
+    background: rgba(0,0,0,0.25);
+    padding: 15px;
+    border-radius: 10px;
+    word-break: break-word;
+}
+
+/* ----------------------------
+   Login/Register forms
+---------------------------- */
+#loginContainer, #registerContainer, #otpVerification {
+    margin-top: 20px;
+    background: rgba(0,0,0,0.2);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+#loginContainer h2, #registerContainer h2, #otpVerification h2 {
+    margin-bottom: 15px;
+}
+
+#loginMsg, #registerMsg {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ffcccb;  /* red for errors, updated dynamically for success */
+}
+
+/* ----------------------------
+   Text & links
+---------------------------- */
+p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+p button {
+    background-color: transparent;
+    border: none;
+    color: #ffd700;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+p button:hover {
+    text-decoration: underline;
+}
+
+/* ----------------------------
+   OTP section
+---------------------------- */
+#otpVerification {
+    display: none;
+    margin-top: 10px;
+}
+
+/* ----------------------------
+   Responsive
+---------------------------- */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"] {
+        width: 95%;
+    }
+}

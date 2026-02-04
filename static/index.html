@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Air Quality Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🌍 Air Quality Prediction</h1>
+
+    <!-- Login Form -->
+    <div id="loginContainer">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button type="button" onclick="loginUser()">Login</button>
+        <p id="loginMsg"></p>
+        <p>Don't have an account? 
+            <button type="button" onclick="showRegister()">Register</button>
+        </p>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerContainer" style="display:none;">
+        <h2>Register</h2>
+        <input type="text" id="regUsername" placeholder="Username">
+        <input type="password" id="regPassword" placeholder="Password">
+        <input type="email" id="regEmail" placeholder="Email">
+        <button type="button" onclick="sendOtp()">Register</button>
+        <p id="registerMsg"></p>
+
+        <!-- OTP verification (hidden until OTP sent) -->
+        <div id="otpSection" style="display:none; margin-top:15px;">
+            <input type="text" id="regOtp" placeholder="Enter OTP">
+            <button type="button" onclick="verifyOtp()">Verify OTP</button>
+        </div>
+
+        <p>Already have an account? 
+            <button type="button" onclick="showLogin()">Login</button>
+        </p>
+    </div>
+
+    <!-- Prediction Section (hidden until login) -->
+    <div id="predictionContainer" style="display:none;">
+        <p>Upload a sky/atmosphere image to estimate pollution levels</p>
+
+        <!-- Hidden file input -->
+        <input type="file" id="imageInput" accept="image/*" style="display:none">
+
+        <div class="buttons">
+            <button type="button" onclick="selectImage()">Upload Image</button>
+            <button type="button" onclick="uploadImage()">Predict</button>
+        </div>
+
+        <div id="preview" style="display:none;"></div>
+        <div id="results" style="display:none;"></div>
+    </div>
+</div>
+
+<script src="/static/script.js?v=1.6"></script>
+</body>
+</html>
