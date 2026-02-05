@@ -29,8 +29,6 @@ fastapi-mail
 # Password hashing
 passlib[bcrypt]
 
-#Model download
-gdown
 
 joblib
 python-multipart

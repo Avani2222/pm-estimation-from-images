@@ -11,11 +11,6 @@ import os
 # CONFIG
 # -------------------------------
 MODEL_PATH = "models/resnet34_aqi.pth"
-MODEL_URL = "https://drive.google.com/file/d/1XeCCTB2HQn4jH-zdCp-Sfh8bVRmZnuzb/view?usp=sharing"
-if not os.path.exists(MODEL_PATH):
-    os.makedirs("models", exist_ok=True)
-    print("Downloading model...")
-    gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
 SCALER_PATH = "/Users/avanigupta/pm-estimation-from-images/models/label_scaler.save"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 LABEL_COLS = ['AQI','PM2.5','PM10','O3','CO','SO2','NO2']
