@@ -4,7 +4,8 @@ venv/
 env/
 
 # Ignore model weights
-models/*.pth
+models/mobilenet_v2_aqi.pth
+models/resnet18_aqi.pth
 models/*.pt
 models/*.pkl
 models/*.joblib
