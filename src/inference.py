@@ -10,7 +10,7 @@ import os
 # -------------------------------
 # CONFIG
 # -------------------------------
-MODEL_PATH = "/Users/avanigupta/pm-estimation-from-images/models/resnet34_aqi.pth"
+MODEL_PATH = "models/resnet34_aqi.pth"
 MODEL_URL = "https://drive.google.com/file/d/1XeCCTB2HQn4jH-zdCp-Sfh8bVRmZnuzb/view?usp=sharing"
 if not os.path.exists(MODEL_PATH):
     os.makedirs("models", exist_ok=True)
