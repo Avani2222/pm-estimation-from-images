@@ -1,1 +1,12 @@
-data/HVAQ-dataset/
+# Virtual environment
+pm_prediction/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Model weights
+models/*.pth
+
+# Environment variables
+.envdata/HVAQ-dataset/
