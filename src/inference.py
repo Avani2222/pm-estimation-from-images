@@ -10,7 +10,7 @@ from model import get_model  # your custom model loader
 # CONFIG
 # -------------------------------
 MODEL_PATH = "models/resnet34_aqi.pth"
-SCALER_PATH = "/Users/avanigupta/pm-estimation-from-images/models/label_scaler.save"
+SCALER_PATH = "models/label_scaler.save"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 LABEL_COLS = ['AQI','PM2.5','PM10','O3','CO','SO2','NO2']
 
