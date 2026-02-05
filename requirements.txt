@@ -1,36 +1,36 @@
 
-numpy==1.26.2
+numpy
 
 
 
 
 # Machine Learning
-scikit-learn==1.3.1
+scikit-learn
 
 
 # Image processing
-Pillow==10.1.0
+Pillow
 
 
 # Deep learning (optional)
 
-torch==2.1.0
-torchvision==0.16.1
+torch
+torchvision
 
 
 # FastAPI & API tools
-fastapi==0.111.1
-uvicorn==0.23.2
-python-multipart==0.0.6
+fastapi
+uvicorn
+python-multipart
 
 # Email verification
-fastapi-mail==1.6.1
+fastapi-mail
 
 # Password hashing
-passlib[bcrypt]==1.7.4
+passlib[bcrypt]
 
 #Model download
-gdown==5.2.1
+gdown
 
 joblib
 python-multipart
