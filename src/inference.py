@@ -4,8 +4,7 @@ from torchvision import transforms
 from PIL import Image
 import joblib
 from model import get_model  # your custom model loader
-import gdown
-import os
+
 
 # -------------------------------
 # CONFIG
