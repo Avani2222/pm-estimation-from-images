@@ -27,7 +27,7 @@ python-multipart==0.0.6
 fastapi-mail==1.6.1
 
 # Password hashing
-passlib[bcrypt]==1.8.2
+passlib[bcrypt]==1.7.4
 
 #Model download
 gdown==5.2.1
