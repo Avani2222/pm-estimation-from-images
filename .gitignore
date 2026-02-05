@@ -8,7 +8,6 @@ models/*.pth
 models/*.pt
 models/*.pkl
 models/*.joblib
-models/*.save
 
 # But keep the folder itself
 !models/.gitkeep
