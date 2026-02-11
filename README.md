@@ -6,7 +6,7 @@ Users upload a **sky image** and receive **real-time air quality metrics** throu
 ---
 
 ## 🚀 Live App  
-🔗 **[Try the App](https://air-quality-api-251707603195.asia-south1.run.app)**
+🔗 **[Air Quality Prediction](https://air-quality-api-251707603195.asia-south1.run.app)**
 
 ---
 
@@ -140,5 +140,6 @@ App will run at 👉 http://localhost:8000 write in .md format
 **Avani Gupta**  
 Machine Learning & Computer Vision Enthusiast  
 
-🔗 LinkedIn: [YOUR_LINKEDIN ](https://www.linkedin.com/in/avani-gupta-b59a59215/) 
-🔗 GitHub: YOUR_GITHUB  
+🔗 LinkedIn: [Linkden](https://www.linkedin.com/in/avani-gupta-b59a59215/) 
+🔗 GitHub: [Github](https://github.com/Avani2222) 
+
