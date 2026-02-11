@@ -1,86 +1,144 @@
-# 🌍 PM Estimation from Images
+# 🌫️ AirSight – Image-Based Air Quality Prediction
 
-A **FastAPI-based deep learning application** that predicts **air quality metrics** (AQI, PM2.5, PM10, etc.) from uploaded sky/atmosphere images — with **secure user authentication and account management**.
-
-This system uses a trained computer vision model to estimate pollution levels from visual environmental cues in images.
-
----
-
-## 🚀 Features
-
-- 🖼️ **Image-Based Air Quality Prediction**  
-  Upload an image and receive estimated pollution metrics.
-
-- 🔐 **User Authentication System**
-  - User registration  
-  - Login with password  
-  - JWT-based authentication  
-  - Protected API routes  
-
-- ⚡ **FastAPI Backend**
-  - High-performance async API  
-  - Automatic Swagger & ReDoc documentation  
-
-- 🧠 **Deep Learning Model Integration**
-  - PyTorch model loading  
-  - Image preprocessing  
-  - Multi-metric regression output  
+A machine learning web application that estimates **air quality and pollution levels from open-sky images** using computer vision.  
+Users upload a **sky image** and receive **real-time air quality metrics** through an interactive web interface.
 
 ---
 
-## 🧠 How It Works
-
-1. A user creates an account or logs in  
-2. The user uploads an image through the `/predict` endpoint  
-3. The backend processes the image  
-4. The trained model predicts air quality metrics  
-5. The results are returned as a JSON response  
+## 🚀 Live App  
+🔗 **[Try the App](https://air-quality-api-251707603195.asia-south1.run.app)**
 
 ---
 
-## 📂 Project Structure
+## 🧠 What This Project Does
 
-pm-estimation-from-images/
-│
-├── models/ # Saved model weights
-├── notebooks/ # Training / research notebooks
-├── src/
-│ ├── api.py # Main FastAPI app
-│ ├── auth.py # Authentication routes & logic
-│ ├── database.py # Database connection & models
-│ ├── inference.py # Model loading and prediction
-│ └── utils/ # Helper functions
-│
-├── static/ # Frontend files (HTML/CSS/JS)
-├── requirements.txt # Dependencies
-├── runtime.txt # Python runtime version (for deployment)
-└── README.md
+This system analyzes **open-sky images** and predicts:
 
+- **AQI (Air Quality Index)**
+- **PM2.5** – Fine particulate matter  
+- **PM10** – Coarse particulate matter  
+- **O₃ (Ozone)**  
+- **CO (Carbon Monoxide)**  
+- **SO₂ (Sulfur Dioxide)**  
+- **NO₂ (Nitrogen Dioxide)**  
 
 ---
 
-## 🛠️ Installation (Local Setup)
+## 📊 Example Output
+
+AQI: 63  
+PM2.5: 32.49 µg/m³  
+PM10: 68.19 µg/m³  
+O3: 17.3 ppb  
+CO: 177.68 ppm  
+SO2: 4.0 ppb  
+NO2: 14.22 ppb  
+
+---
+
+## 🖼️ How It Works
+
+1. User uploads an **open-sky image**  
+2. Image is processed using **computer vision techniques**  
+3. Trained **ML models estimate pollutant concentrations**  
+4. Backend API returns predictions  
+5. Results are displayed on a **user-friendly dashboard**
+
+---
+
+## 🏗️ Tech Stack
+
+### ⚙️ Backend
+- FastAPI  
+- SQLAlchemy  
+- PostgreSQL  
+
+### 🤖 Machine Learning
+- PyTorch  
+- Scikit-learn  
+- NumPy  
+
+### 🔐 Authentication
+- Email OTP verification  
+- Password hashing (bcrypt)  
+
+### ☁️ Deployment
+- Google Cloud Run  
+- Docker
+
+---
+
+## 🔐 Features
+
+✔ Image-based air quality prediction  
+✔ REST API built with FastAPI  
+✔ Machine Learning model integration  
+✔ Secure user authentication with email OTP verification  
+✔ Cloud deployment with a scalable backend  
+
+---
+
+## 🧪 Running Locally
 
 ### 1️⃣ Clone the Repository
-
 ```bash
-git clone https://github.com/Avani2222/pm-estimation-from-images.git
-cd pm-estimation-from-images
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
 ```
 
-## 2️⃣ Create a Virtual Environment
-
+###2️⃣ Create virtual environment 
 ```bash
-python -m venv venv
-source venv/bin/activate      # macOS/Linux
-venv\Scripts\activate         # Windows
+python -m venv venv source venv/bin/activate # Mac/Linux
+venv\Scripts\activate # Windows
 ```
 
-## 3️⃣ Install Dependencies
-
+###3️⃣ Install dependencies 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 4️⃣ Set Environment Variables
+###4️⃣ Set environment variables 
+```bash
+Create a .env file:
+DATABASE_URL=your_database_url
+SECRET_KEY=your_secret_key
+MAIL_USERNAME=your_email
+MAIL_PASSWORD=your_app_password
+```
 
+###5️⃣ Run the server 
+```bash
+uvicorn src.api:app --reload
+```
+
+App will run at 👉 http://localhost:8000 write in .md format
+
+---
+
+## 📦 API Endpoints
+
+| Method | Endpoint                | Description                                      |
+|--------|-------------------------|--------------------------------------------------|
+| POST   | `/predict`              | Upload image and get air quality predictions     |
+| POST   | `/register/send-otp`    | Send OTP to email                                |
+| POST   | `/register/verify-otp`  | Verify OTP and create account                    |
+| POST   | `/login`                | User login                                       |
+
+---
+
+## 📊 Future Improvements
+
+- 🌍 Add real-time weather data integration  
+- 📱 Mobile-friendly UI  
+- 🛰️ Satellite image support  
+- 📈 Model performance dashboard  
+
+---
+
+## 👩‍💻 Author
+
+**Avani Gupta**  
+Machine Learning & Computer Vision Enthusiast  
+
+🔗 LinkedIn: [YOUR_LINKEDIN ](https://www.linkedin.com/in/avani-gupta-b59a59215/) 
+🔗 GitHub: YOUR_GITHUB  
