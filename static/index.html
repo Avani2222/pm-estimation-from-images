@@ -13,10 +13,19 @@
     <!-- Login Form -->
     <div id="loginContainer">
         <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username">
+        <input type="text" id="username" placeholder="Username or Email">
         <input type="password" id="password" placeholder="Password">
         <button type="button" onclick="loginUser()">Login</button>
         <p id="loginMsg"></p>
+
+        <!-- ADD HERE -->
+        <p>
+            <button type="button" onclick="showForgotPassword()" 
+                    style="background:none; border:none; color:rgb(0, 123, 255); cursor:pointer;">
+                Forgot Password?
+            </button>
+        </p>
+
         <p>Don't have an account? 
             <button type="button" onclick="showRegister()">Register</button>
         </p>
@@ -41,11 +50,31 @@
             <button type="button" onclick="showLogin()">Login</button>
         </p>
     </div>
+    <!-- Forgot Password Form -->
+    <div id="forgotContainer" style="display:none;">
+        <h2>Forgot Password</h2>
+
+        <input type="email" id="forgotEmail" placeholder="Enter your registered email">
+        <button type="button" onclick="sendResetOtp()">Send OTP</button>
+
+        <p id="forgotMsg"></p>
+
+        <!-- Reset OTP + New Password Section -->
+        <div id="resetOtpSection" style="display:none; margin-top:15px;">
+            <input type="text" id="resetOtp" placeholder="Enter OTP">
+            <input type="password" id="newPassword" placeholder="New Password">
+            <button type="button" onclick="verifyResetOtp()">Reset Password</button>
+        </div>
+
+        <p>
+            <button type="button" onclick="showLogin()">Back to Login</button>
+        </p>
+    </div>
 
     <!-- Prediction Section (hidden until login) -->
     <div id="predictionContainer" style="display:none;">
         <p>Upload a sky/atmosphere image to estimate pollution levels</p>
-
+    
         <!-- Hidden file input -->
         <input type="file" id="imageInput" accept="image/*" style="display:none">
 
@@ -59,6 +88,6 @@
     </div>
 </div>
 
-<script src="/static/script.js?v=1.6"></script>
+<script src="/static/script.js?v=2.5"></script>
 </body>
 </html>

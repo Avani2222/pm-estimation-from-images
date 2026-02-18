@@ -1,34 +1,20 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 
-numpy
-
-
-
-
-# Machine Learning
-scikit-learn
-
-
-# Image processing
-Pillow
-
-
-# Deep learning (optional)
-
-torch
-torchvision
-
-
-# FastAPI & API tools
 fastapi
 uvicorn
 python-multipart
-
-# Email verification
+sqlalchemy
+psycopg2-binary
+bcrypt==4.0.1
+passlib[bcrypt]==1.7.4
 fastapi-mail
-
-# Password hashing
-passlib[bcrypt]
-
-
+python-jose[cryptography]
+python-dotenv
+pydantic
+numpy
+scikit-learn
 joblib
-python-multipart
+Pillow
+torch
+torchvision
+

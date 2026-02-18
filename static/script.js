@@ -1,3 +1,5 @@
+//const API_BASE = "https://air-quality-api-251707603195.asia-south1.run.app";
+const API_BASE = "http://127.0.0.1:8000"; 
 console.log("JS loaded ✅");
 
 // ---------------------------
@@ -10,6 +12,10 @@ const loginContainer = document.getElementById("loginContainer");
 const registerContainer = document.getElementById("registerContainer");
 const predictionContainer = document.getElementById("predictionContainer");
 const registerMsg = document.getElementById("registerMsg");
+const forgotContainer = document.getElementById("forgotContainer");
+const forgotMsg = document.getElementById("forgotMsg");
+const locationMsg = document.getElementById("locationMsg");
+let userLocation = null;
 
 // ---------------------------
 // Helper functions: show/hide sections
@@ -18,12 +24,7 @@ function showPredictionSection() {
     loginContainer.style.display = "none";
     registerContainer.style.display = "none";
     predictionContainer.style.display = "block";
-}
-
-function showLogin() {
-    loginContainer.style.display = "block";
-    registerContainer.style.display = "none";
-    predictionContainer.style.display = "none";
+    requestLocation();
 }
 
 function showRegister() {
@@ -33,40 +34,57 @@ function showRegister() {
     document.getElementById("otpSection").style.display = "none"; // hide OTP input
 }
 
+function showForgotPassword() {
+    loginContainer.style.display = "none";
+    registerContainer.style.display = "none";
+    predictionContainer.style.display = "none";
+    forgotContainer.style.display = "block";
+}
+
+function showLogin() {
+    loginContainer.style.display = "block";
+    registerContainer.style.display = "none";
+    predictionContainer.style.display = "none";
+    forgotContainer.style.display = "none";
+}
+
 // ---------------------------
 // Login
 // ---------------------------
 window.loginUser = async function () {
-    const username = document.getElementById("username").value.trim();
+    const identifier = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
     const loginMsg = document.getElementById("loginMsg");
 
-    if (!username || !password) {
-        loginMsg.textContent = "Please enter username and password";
+    if (!identifier || !password) {
+        loginMsg.textContent = "Please enter email/username and password";
         return;
     }
 
     const formData = new URLSearchParams();
-    formData.append("username", username);
+    formData.append("username", identifier);  // MUST be username
     formData.append("password", password);
 
     try {
-        const response = await fetch("http://localhost:8000/login", {
+        const response = await fetch(`${API_BASE}/login`, {
             method: "POST",
-            body: formData,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData
         });
 
-        if (!response.ok) throw new Error("Invalid username or password");
+        if (!response.ok) throw new Error("Invalid credentials");
 
         const data = await response.json();
         localStorage.setItem("token", data.access_token);
         loginMsg.textContent = "✅ Login successful!";
         showPredictionSection();
     } catch (error) {
-        console.error(error);
         loginMsg.textContent = "❌ " + error.message;
     }
 };
+
 
 // ---------------------------
 // Registration with OTP
@@ -84,14 +102,16 @@ window.sendOtp = async function () {
     }
 
     try {
-        const response = await fetch(`/register/send-otp?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&email=${encodeURIComponent(email)}`, {
-            method: "POST"
+        const response = await fetch(`${API_BASE}/register/send-otp`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password, email })
         });
 
         const data = await response.json();
         if (data.message) {
             registerMsg.textContent = "✅ OTP sent to your email. Check inbox!";
-            document.getElementById("otpSection").style.display = "block"; // show OTP input
+            document.getElementById("otpSection").style.display = "block";
         }
     } catch (error) {
         console.error(error);
@@ -110,22 +130,117 @@ window.verifyOtp = async function () {
     }
 
     try {
-        const response = await fetch(`/register/verify-otp?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`, {
-            method: "POST"
+        const response = await fetch(`${API_BASE}/register/verify-otp`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, otp })
         });
 
         const data = await response.json();
         if (data.success) {
             registerMsg.textContent = "✅ Registration complete! You can now login.";
             document.getElementById("otpSection").style.display = "none";
+            document.getElementById("regOtp").value = "";
         } else {
-            registerMsg.textContent = "❌ " + data.message;
+            registerMsg.textContent = "❌ " + (data.message || "OTP verification failed");
         }
     } catch (error) {
         console.error(error);
         registerMsg.textContent = "❌ Could not verify OTP";
     }
 };
+
+window.sendResetOtp = async function () {
+    const email = document.getElementById("forgotEmail").value.trim();
+
+    if (!email) {
+        forgotMsg.textContent = "Please enter your email";
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE}/forgot-password/send-otp`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            forgotMsg.textContent = "✅ OTP sent to your email.";
+            document.getElementById("resetOtpSection").style.display = "block";
+        } else {
+            forgotMsg.textContent = "❌ " + (data.message || "Error sending OTP");
+        }
+    } catch (error) {
+        console.error(error);
+        forgotMsg.textContent = "❌ Could not send OTP.";
+    }
+};
+
+window.verifyResetOtp = async function () {
+    const email = document.getElementById("forgotEmail").value.trim();
+    const otp = document.getElementById("resetOtp").value.trim();
+    const new_password = document.getElementById("newPassword").value.trim();
+
+    if (!otp || !new_password) {
+        forgotMsg.textContent = "Please enter OTP and new password";
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE}/forgot-password/reset`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, otp, new_password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            forgotMsg.textContent = "✅ Password reset successful. You can now login.";
+            document.getElementById("resetOtpSection").style.display = "none";
+        } else {
+            forgotMsg.textContent = "❌ " + (data.message || "Reset failed");
+        }
+    } catch (error) {
+        console.error(error);
+        forgotMsg.textContent = "❌ Could not reset password.";
+    }
+};
+
+window.requestLocation = async function () {
+    if (!navigator.geolocation) {
+        locationMsg.textContent = "Geolocation not supported.";
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        async (position) => {
+            userLocation = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+
+            locationMsg.textContent = "✅ Location access granted.";
+            localStorage.setItem("user_location", JSON.stringify(userLocation));
+
+            // 🔹 Send to backend
+            await fetch(`${API_BASE}/forgot-password/send-otp`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userLocation)
+            });
+        },
+        (error) => {
+            locationMsg.textContent = "❌ Location permission denied.";
+        }
+    );
+};
+
 
 // ---------------------------
 // Image picker & preview
@@ -166,9 +281,13 @@ window.uploadImage = async function () {
 
     const formData = new FormData();
     formData.append("file", file);
-
+    const storedLocation = JSON.parse(localStorage.getItem("user_location"));
+    if (storedLocation) {
+        formData.append("latitude", storedLocation.latitude);
+        formData.append("longitude", storedLocation.longitude);
+    }
     try {
-        const response = await fetch("http://localhost:8000/predict", {
+        const response = await fetch(`${API_BASE}/predict`, {
             method: "POST",
             body: formData,
             headers: {

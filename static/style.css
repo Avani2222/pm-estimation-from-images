@@ -47,10 +47,25 @@ button:hover {
     transform: scale(1.05);
 }
 
+/* Secondary button (links like Forgot Password) */
+button.link-btn {
+    background: transparent;
+    color: #ffd700;
+    font-size: 14px;
+    padding: 0;
+}
+
+button.link-btn:hover {
+    text-decoration: underline;
+    transform: none;
+}
+
 /* ----------------------------
    Inputs
 ---------------------------- */
-input[type="text"], input[type="password"], input[type="email"] {
+input[type="text"],
+input[type="password"],
+input[type="email"] {
     width: 90%;
     padding: 10px;
     margin: 8px 0;
@@ -83,23 +98,45 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 /* ----------------------------
-   Login/Register forms
+   Auth Sections
 ---------------------------- */
-#loginContainer, #registerContainer, #otpVerification {
+#loginContainer,
+#registerContainer,
+#forgotPasswordContainer,
+#resetPasswordContainer,
+#otpSection {
     margin-top: 20px;
     background: rgba(0,0,0,0.2);
     padding: 20px;
     border-radius: 12px;
+    display: none;
 }
 
-#loginContainer h2, #registerContainer h2, #otpVerification h2 {
+/* Show login by default */
+#loginContainer {
+    display: block;
+}
+
+h2 {
     margin-bottom: 15px;
 }
 
-#loginMsg, #registerMsg {
+/* ----------------------------
+   Messages
+---------------------------- */
+.message {
     margin-top: 10px;
     font-size: 14px;
-    color: #ffcccb;  /* red for errors, updated dynamically for success */
+}
+
+/* Error */
+.error {
+    color: #ffcccb;
+}
+
+/* Success */
+.success {
+    color: #90ee90;
 }
 
 /* ----------------------------
@@ -108,26 +145,6 @@ input[type="text"], input[type="password"], input[type="email"] {
 p {
     margin-top: 10px;
     font-size: 14px;
-}
-
-p button {
-    background-color: transparent;
-    border: none;
-    color: #ffd700;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-p button:hover {
-    text-decoration: underline;
-}
-
-/* ----------------------------
-   OTP section
----------------------------- */
-#otpVerification {
-    display: none;
-    margin-top: 10px;
 }
 
 /* ----------------------------
@@ -143,7 +160,9 @@ p button:hover {
         margin: 10px 0;
     }
 
-    input[type="text"], input[type="password"], input[type="email"] {
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
         width: 95%;
     }
 }
